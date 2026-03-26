@@ -44,6 +44,15 @@ var scanCmd = &cobra.Command{
 		for _, file := range files {
 			fmt.Println("  📄", file)
 		}
+
+		fmt.Println("\n📖 Reading file contents...")
+		fileData, err := scanner.ReadFiles(files)
+		if err != nil {
+			fmt.Println("❌ Error reading files:", err)
+			return
+		}
+
+		fmt.Printf("🚀 Successfully read %d files! The CLI is now ready to send this data to the AI.\n", len(fileData))
 	},
 }
 
