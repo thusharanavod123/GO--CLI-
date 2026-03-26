@@ -3,7 +3,7 @@ package cmd
 import (
 	"fmt"
 	"path/filepath"
-
+     "iam-policy-cli/internal/api"
 	"iam-policy-cli/internal/scanner" // <-- Importing our new package!
 
 	"github.com/spf13/cobra"
@@ -53,6 +53,11 @@ var scanCmd = &cobra.Command{
 		}
 
 		fmt.Printf("🚀 Successfully read %d files! The CLI is now ready to send this data to the AI.\n", len(fileData))
+
+		err = api.SendToAI(fileData)
+		if err != nil {
+			fmt.Println("❌ Network Error:", err)
+			return }
 	},
 }
 
